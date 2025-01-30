@@ -2,7 +2,8 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/a",
+    "packages/b"
   ],
   "devDependencies": {
     "@eslint/js": "^9.19.0",
