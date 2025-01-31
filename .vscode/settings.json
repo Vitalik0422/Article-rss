@@ -1,0 +1,28 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "terminal.integrated.profiles.windows": {
+    "Frontend Terminal": {
+      "path": "powershell.exe",
+      "icon": "browser",
+      "color": "terminal.ansiGreen",
+      "overrideName": true,
+      "cwd": "${workspaceFolder}/packages/frontend"
+    },
+    "Backend Terminal": {
+      "path": "powershell.exe",
+      "icon": "server",
+      "color": "terminal.ansiBlue",
+      "overrideName": true,
+      "cwd": "${workspaceFolder}/packages/backend"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "Frontend Terminal",
+  "cSpell.words": ["autoincrement"]
+}
