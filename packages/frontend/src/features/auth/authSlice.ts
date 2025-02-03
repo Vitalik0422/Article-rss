@@ -1,17 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser } from './authThunk';
+import { loginUser } from './loginThunk';
+import { signUpUser } from './signUpThunk';
 
-interface AuthState {
+export interface AuthState {
   email: string | null;
+  name: string | null;
   token: string | null;
+  isLogin: boolean;
+  isLoading: boolean;
 }
+
+const initialState: AuthState = {
+  email: null,
+  name: null,
+  token: null,
+  isLogin: true,
+  isLoading: false,
+};
 
 export const AuthSlice = createSlice({
   name: 'auth',
-  initialState: {
-    email: null,
-    token: null,
-  } as AuthState,
+  initialState,
   reducers: {
     logout: (state) => {
       state.email = null;
@@ -19,12 +28,27 @@ export const AuthSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.email = action.payload.email
-      state.token = action.payload.token
-    })
+    builder
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginUser.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(signUpUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signUpUser.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(signUpUser.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 
-export const{logout} = AuthSlice.actions
-export default AuthSlice.reducer
+export const { actions: authActions } = AuthSlice;
+export const { reducer: authReducer } = AuthSlice;

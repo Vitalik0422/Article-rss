@@ -6,4 +6,6 @@ export const instance = axios.create({
 
 export enum URL {
   AUTH = '/auth',
+  SIGN_UP = '/signUp',
+  RSS = '/rss',
 }
