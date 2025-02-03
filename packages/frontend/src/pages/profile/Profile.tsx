@@ -1,5 +1,13 @@
+import RssUrlList from '../../components/profileComponent/RssUrlList';
+import UserData from '../../components/profileComponent/UserData';
+
 const Profile = () => {
-  return <div>Hello world</div>;
+  return (
+    <>
+      <UserData />
+      <RssUrlList />
+    </>
+  );
 };
 
 export default Profile;

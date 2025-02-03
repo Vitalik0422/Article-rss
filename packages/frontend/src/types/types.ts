@@ -15,3 +15,8 @@ export interface SignUpRequest {
 export interface SignUpResponse {
   email: string;
 }
+
+export interface RssParamResponse {
+  name: string;
+  url: string;
+}

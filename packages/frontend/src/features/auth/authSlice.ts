@@ -4,12 +4,19 @@ import { signUpUser } from './signUpThunk';
 
 export interface AuthState {
   email: string | null;
+  name: string | null;
   token: string | null;
   isLogin: boolean;
   isLoading: boolean;
 }
 
-const initialState: AuthState = { email: null, token: null, isLogin: true, isLoading: false };
+const initialState: AuthState = {
+  email: null,
+  name: null,
+  token: null,
+  isLogin: true,
+  isLoading: false,
+};
 
 export const AuthSlice = createSlice({
   name: 'auth',
