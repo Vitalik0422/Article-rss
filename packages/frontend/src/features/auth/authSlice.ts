@@ -2,18 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { loginUser } from './loginThunk';
 import { signUpUser } from './signUpThunk';
 
-export interface AuthState {
-  email: string | null;
+interface User {
   name: string | null;
+  email: string | null;
   token: string | null;
+}
+
+export interface AuthState {
+  authData: User;
   isLogin: boolean;
   isLoading: boolean;
 }
 
 const initialState: AuthState = {
-  email: null,
-  name: null,
-  token: null,
+  authData: { name: null, email: null, token: null },
   isLogin: true,
   isLoading: false,
 };
@@ -23,9 +25,11 @@ export const AuthSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.email = null;
-      state.token = null;
+      state.authData.email = null;
+      state.authData.name = null;
+      state.authData.token = null;
     },
+    setAuthData: (state) => {},
   },
   extraReducers(builder) {
     builder

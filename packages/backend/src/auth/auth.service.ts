@@ -35,7 +35,11 @@ export class AuthService {
         );
         if (hashPassword) {
           return {
-            access_token: await this.jwtService.signAsync({
+            authData: {
+              name: existingUser.name,
+              email: existingUser.email,
+            },
+            token: await this.jwtService.signAsync({
               name: existingUser.name,
               email: existingUser.email,
             }),
