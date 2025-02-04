@@ -2,9 +2,14 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/a",
-    "packages/b"
+    "packages/*"
   ],
+  "scripts": {
+    "dev": "npx lerna run start --stream",
+    "start:dev": "npx lerna run --parallel --scope \"*\" dev start:dev",
+    "build": "npx lerna run build --stream",
+    "clean": "rimraf node_modules packages/*/node_modules"
+  },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@types/react": "^18.3.18",

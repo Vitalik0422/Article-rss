@@ -13,6 +13,7 @@ export class AuthController {
   }
   @Post('login')
   login(@Body() loginAuthDto: LoginAuthDto) {
+    console.log('work');
     return this.authService.login(loginAuthDto);
   }
 }

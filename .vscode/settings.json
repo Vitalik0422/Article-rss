@@ -13,16 +13,22 @@
       "icon": "browser",
       "color": "terminal.ansiGreen",
       "overrideName": true,
-      "cwd": "${workspaceFolder}/packages/frontend"
+      "cwd": "${workspaceRoot}/packages/frontend"
     },
     "Backend Terminal": {
       "path": "powershell.exe",
       "icon": "server",
       "color": "terminal.ansiBlue",
       "overrideName": true,
-      "cwd": "${workspaceFolder}/packages/backend"
+      "cwd": "${workspaceRoot}/packages/backend"
     }
   },
   "terminal.integrated.defaultProfile.windows": "Frontend Terminal",
-  "cSpell.words": ["autoincrement"]
+  "cSpell.words": ["autoincrement"],
+
+  // Додайте ці налаштування
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
+  "terminal.integrated.tabs.enabled": true,
+  "terminal.integrated.shellIntegration.enabled": true
 }

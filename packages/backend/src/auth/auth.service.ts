@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { UserService } from 'src/user/user/user.service';
 import { HashService } from 'src/hash/hash.service';
@@ -28,28 +33,37 @@ export class AuthService {
   async login(loginAuthDto: LoginAuthDto) {
     try {
       const existingUser = await this.user.findOne(loginAuthDto.email);
-      if (existingUser) {
-        const hashPassword = await this.hash.compare(
-          loginAuthDto.password,
-          existingUser.password,
-        );
-        if (hashPassword) {
-          return {
-            authData: {
-              name: existingUser.name,
-              email: existingUser.email,
-            },
-            token: await this.jwtService.signAsync({
-              name: existingUser.name,
-              email: existingUser.email,
-            }),
-          };
-        } else {
-          throw new UnauthorizedException();
-        }
+      if (!existingUser) {
+        throw new NotFoundException('User not found');
       }
+
+      const hashPassword = await this.hash.compare(
+        loginAuthDto.password,
+        existingUser.password,
+      );
+
+      if (!hashPassword) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      return {
+        authData: {
+          name: existingUser.name,
+          email: existingUser.email,
+        },
+        token: await this.jwtService.signAsync({
+          name: existingUser.name,
+          email: existingUser.email,
+        }),
+      };
     } catch (error) {
-      return error;
+      if (
+        error instanceof UnauthorizedException ||
+        error instanceof NotFoundException
+      ) {
+        throw error;
+      }
+      throw new InternalServerErrorException('Something went wrong');
     }
   }
 }
