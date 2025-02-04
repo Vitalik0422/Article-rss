@@ -3,6 +3,8 @@ import { emailUser, nameUser } from '../../features/user/userSelector';
 
 const UserData = () => {
   const name = useSelector(nameUser);
+  console.log(name);
+
   const email = useSelector(emailUser);
   return (
     <>

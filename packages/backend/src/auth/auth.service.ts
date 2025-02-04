@@ -1,6 +1,5 @@
 import {
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -45,7 +44,6 @@ export class AuthService {
       if (!hashPassword) {
         throw new UnauthorizedException('Invalid credentials');
       }
-
       return {
         authData: {
           name: existingUser.name,
@@ -56,14 +54,8 @@ export class AuthService {
           email: existingUser.email,
         }),
       };
-    } catch (error) {
-      if (
-        error instanceof UnauthorizedException ||
-        error instanceof NotFoundException
-      ) {
-        throw error;
-      }
-      throw new InternalServerErrorException('Something went wrong');
+    } catch {
+      throw new NotFoundException();
     }
   }
 }

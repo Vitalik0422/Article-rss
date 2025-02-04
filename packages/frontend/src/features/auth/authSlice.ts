@@ -12,7 +12,7 @@ export interface AuthState {
   token: string | null;
   isLogin: boolean;
   isLoading: boolean;
-  errorMessage: string | null;
+  errorValue: { message: string; statusCode?: number | undefined } | null;
 }
 
 const initialState: AuthState = {
@@ -20,7 +20,7 @@ const initialState: AuthState = {
   token: null,
   isLogin: true,
   isLoading: false,
-  errorMessage: null,
+  errorValue: { message: ' ', statusCode: undefined },
 };
 
 export const AuthSlice = createSlice({
@@ -43,7 +43,8 @@ export const AuthSlice = createSlice({
         state.authData = action.payload.authData;
         state.isLoading = false;
       })
-      .addCase(loginUser.rejected, (state) => {
+      .addCase(loginUser.rejected, (state, action) => {
+        state.errorValue = action.payload ?? { message: 'Unknown error' };
         state.isLoading = false;
       })
       .addCase(signUpUser.pending, (state) => {
