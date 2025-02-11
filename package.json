@@ -5,14 +5,15 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npx lerna run start --stream",
-    "start:dev": "npx lerna run --parallel --scope \"*\" dev start:dev",
+    "start": "npx lerna run start --stream",
+    "start:dev": "npx lerna run start:dev --stream",
     "build": "npx lerna run build --stream",
     "clean": "rimraf node_modules packages/*/node_modules"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@types/react": "^18.3.18",
+    "@types/redux-persist": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
     "@typescript-eslint/parser": "^8.22.0",
     "eslint": "^9.19.0",

@@ -22,6 +22,7 @@ const initialState: AuthState = {
   isLoading: false,
   errorValue: { message: ' ', statusCode: undefined },
 };
+console.log('AuthSlice initialization');
 
 export const AuthSlice = createSlice({
   name: 'auth',
@@ -41,6 +42,7 @@ export const AuthSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.authData = action.payload.authData;
+        state.token = action.payload.token;
         state.isLoading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {

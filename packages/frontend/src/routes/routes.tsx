@@ -1,12 +1,12 @@
-import { RouteObject } from 'react-router';
 import { Login } from '../pages/auth/Login';
 import Layout from '../components/Layout';
 import Profile from '../pages/profile/Profile';
 import ProtectedRouter from '../components/ProtectedRouter';
 import Register from '../pages/auth/Register';
 import Home from '../pages/home/Home';
+import { createBrowserRouter } from 'react-router-dom';
 
-export const routes: RouteObject[] = [
+export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
@@ -16,12 +16,11 @@ export const routes: RouteObject[] = [
         element: <Home />,
       },
       {
-        path: '/login',
+        path: 'login',
         element: <Login />,
-
       },
       {
-        path: '/profile',
+        path: 'profile',
         element: (
           <ProtectedRouter>
             <Profile />
@@ -29,10 +28,9 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: '/register',
+        path: 'register',
         element: <Register />,
       },
     ],
   },
-
-];
+]);
